@@ -5,7 +5,7 @@
 ¤ Product:
 | | | |
 | ----------- | ------------ | ------------ |
-| [Key] | int | OrderId |
+| [Key] | int | ProductId |
 | [Req] | String | Name |
 | [Range] | double | Price |
 | | String | Description |
