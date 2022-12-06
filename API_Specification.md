@@ -14,7 +14,7 @@
 ¤ Order:
 | | | |
 | ----------- | ------------ | ------------ |
-| [Key] | int | ProductId |
+| [Key] | int | OrderId |
 | | int | Count |
 | | Product | Product |
 | | int | ProductId |
