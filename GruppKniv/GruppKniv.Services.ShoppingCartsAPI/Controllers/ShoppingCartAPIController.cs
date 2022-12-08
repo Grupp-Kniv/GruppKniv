@@ -5,19 +5,19 @@ using Microsoft.AspNetCore.Mvc;
 namespace GruppKniv.Services.ShoppingCartsAPI.Controllers;
 [ApiController]
 [Route("api/shoppingCart")]
-public class ShoppingCartController : Controller
+public class ShoppingCartAPIController : Controller
 {
     private readonly IShoppingCartRepository _shoppingCart;
     private readonly ResponseDto _response;
 
-    public ShoppingCartController(IShoppingCartRepository shoppingCart)
+    public ShoppingCartAPIController(IShoppingCartRepository shoppingCart)
     {
         _shoppingCart = shoppingCart;
         _response = new ResponseDto();
     }
 
     [HttpGet("GetShoppingCart/{userId}")]
-    public async Task<ResponseDto> GetShoppingCart(string userId)
+    public async Task<ResponseDto> GetShoppingCartByUserId(string userId)
     {
         try
         {
