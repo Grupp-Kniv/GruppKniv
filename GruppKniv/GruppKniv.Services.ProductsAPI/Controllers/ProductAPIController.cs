@@ -1,7 +1,6 @@
 ﻿using GruppKniv.Services.ProductsAPI.Models.Dto;
 using GruppKniv.Services.ProductsAPI.Repository;
 using Microsoft.AspNetCore.Mvc;
-using PizzaResturante.Services.ProductsAPI.Models.Dto;
 
 namespace GruppKniv.Services.ProductsAPI.Controllers
 {
