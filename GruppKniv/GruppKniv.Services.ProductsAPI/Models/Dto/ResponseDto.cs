@@ -1,4 +1,4 @@
-﻿namespace PizzaResturante.Services.ProductsAPI.Models.Dto
+﻿namespace GruppKniv.Services.ProductsAPI.Models.Dto
 {
     public class ResponseDto
     {
