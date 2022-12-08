@@ -1,8 +1,7 @@
 ﻿using AutoMapper;
 using GruppKniv.Services.ProductsAPI.Models;
 using GruppKniv.Services.ProductsAPI.Models.Dto;
-using PizzaResturante.Services.ProductsAPI.Models;
-using PizzaResturante.Services.ProductsAPI.Models.Dto;
+
 
 namespace GruppKniv.Services.ProductsAPI
 {
