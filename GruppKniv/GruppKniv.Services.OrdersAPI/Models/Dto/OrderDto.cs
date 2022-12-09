@@ -3,11 +3,8 @@
     public class OrderDto
     {
         public int OrderId { get; set; }
-        public int Count { get; set; }
-        public ProductDto Product { get; set; }
-        public int ProductId { get; set; }
-        public UserDto User { get; set; }
-        public int UserId { get; set; }
+        public virtual Product Product { get; set; }
+        public User User { get; set; }
 
     }
 }

@@ -3,5 +3,6 @@
     public class UserDto
     {
         public int userId { get; set; }
+
     }
 }

@@ -5,6 +5,6 @@ namespace GruppKniv.Services.OrdersAPI.Models
     public class User
     {
         [Key]
-        public string Username { get; set; }
+        public int userId { get; set; }
     }
 }

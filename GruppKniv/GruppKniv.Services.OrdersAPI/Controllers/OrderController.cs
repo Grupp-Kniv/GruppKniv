@@ -1,4 +1,5 @@
-﻿using GruppKniv.Services.OrdersAPI.Models.Dto;
+﻿using GruppKniv.Services.OrdersAPI.Models;
+using GruppKniv.Services.OrdersAPI.Models.Dto;
 using GruppKniv.Services.OrdersAPI.Repository;
 using Microsoft.AspNetCore.Mvc;
 
@@ -28,8 +29,9 @@ namespace GruppKniv.Services.OrdersAPI.Controllers
             catch (Exception e)
             {
                 _response.IsSuccess = false;
-                _response.ErrorMessages = new List<string>() { e.ToString() };
+                _response.ErrorMessages = new List<string>() {e.ToString()};
             }
+
             return _response;
         }
 
@@ -45,11 +47,28 @@ namespace GruppKniv.Services.OrdersAPI.Controllers
             catch (Exception e)
             {
                 _response.IsSuccess = false;
-                _response.ErrorMessages = new List<string>() { e.ToString() };
+                _response.ErrorMessages = new List<string>() {e.ToString()};
             }
 
             return _response;
         }
 
+        [HttpPost("/order")]
+
+        public async Task<ResponseDto> PlaceOrder(Order mewOrder)
+        {
+            try
+            {
+                OrderDto orderDto = await _orderRepository.PlaceOrder(mewOrder);
+                _response.Result = orderDto;
+            }
+            catch (Exception e)
+            {
+                _response.IsSuccess = false;
+                _response.ErrorMessages = new List<string>() {e.ToString()};
+            }
+           
+            return _response;
+        }
     }
 }

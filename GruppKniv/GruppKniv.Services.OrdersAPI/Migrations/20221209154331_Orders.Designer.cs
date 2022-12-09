@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GruppKniv.Services.OrdersAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221208224621_Orders")]
+    [Migration("20221209154331_Orders")]
     partial class Orders
     {
         /// <inheritdoc />
@@ -32,24 +32,17 @@ namespace GruppKniv.Services.OrdersAPI.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderId"));
 
-                    b.Property<int>("Count")
-                        .HasColumnType("int");
-
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
 
-                    b.Property<int>("UserId")
+                    b.Property<int>("userId")
                         .HasColumnType("int");
-
-                    b.Property<string>("Username")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("OrderId");
 
                     b.HasIndex("ProductId");
 
-                    b.HasIndex("Username");
+                    b.HasIndex("userId");
 
                     b.ToTable("Orders");
                 });
@@ -59,34 +52,26 @@ namespace GruppKniv.Services.OrdersAPI.Migrations
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ImageUrl")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<double>("Price")
-                        .HasColumnType("float");
-
                     b.HasKey("ProductId");
 
-                    b.ToTable("Product");
+                    b.ToTable("Products");
                 });
 
             modelBuilder.Entity("GruppKniv.Services.OrdersAPI.Models.User", b =>
                 {
-                    b.Property<string>("Username")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("userId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.HasKey("Username");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("userId"));
 
-                    b.ToTable("User");
+                    b.HasKey("userId");
+
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("GruppKniv.Services.OrdersAPI.Models.Order", b =>
@@ -99,7 +84,7 @@ namespace GruppKniv.Services.OrdersAPI.Migrations
 
                     b.HasOne("GruppKniv.Services.OrdersAPI.Models.User", "User")
                         .WithMany()
-                        .HasForeignKey("Username")
+                        .HasForeignKey("userId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

@@ -30,9 +30,12 @@ namespace GruppKniv.Services.OrdersAPI.Repository
             return _mapper.Map<OrderDto>(order);
         }
 
-        /*public Task<bool> PlaceOrder(ShoppingCart cart)
+        public async Task<OrderDto> PlaceOrder(Order mewOrder)
         {
-            throw new NotImplementedException();
-        }*/
+            Order order = _mapper.Map<OrderDto, Order>(new OrderDto());
+            _db.Orders.Add(order);
+            await _db.SaveChangesAsync();
+            return _mapper.Map<Order, OrderDto>(order);
+        }
     }
 }
