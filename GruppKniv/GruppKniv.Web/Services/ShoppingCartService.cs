@@ -43,4 +43,15 @@ public class ShoppingCartService : BaseService, IShoppingCartService
             AccessToken = ""
         });
     }
+
+    public async Task<T> RemoveFromCartAsync<T>(int cartId, string token = null)
+    {
+        return await this.SendAsync<T>(new ApiRequest()
+        {
+            ApiType = StaticDetails.ApiType.POST,
+            Data = cartId,
+            Url = StaticDetails.ShoppingCartAPIBase + "/api/shoppingCart/RemoveShoppingCart",
+            AccessToken = ""
+        });
+    }
 }

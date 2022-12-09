@@ -19,23 +19,37 @@ public class ShoppingCartController : Controller
     {
         return View(await LoadCartDtoBasedOnLoggedInUser());
     }
-    private async Task<List<ShoppingCartDto>> LoadCartDtoBasedOnLoggedInUser()
+
+    public async Task<IActionResult> Remove(int cartDetailsId)
+    {
+        var userId = "string";
+        var response = await _shoppingCartService.RemoveFromCartAsync<ResponseDto>(cartDetailsId);
+
+
+        if (response != null && response.IsSuccess)
+        {
+            return RedirectToAction(nameof(ShoppingCartIndex));
+        }
+        return View();
+    }
+
+    private async Task<ShoppingCartDto> LoadCartDtoBasedOnLoggedInUser()
     {
         var userId = "string";
 
         var response = await _shoppingCartService.GetCartByUserIdAsnyc<ResponseDto>(userId);
 
-        List<ShoppingCartDto> cartDto = new();
+        ShoppingCartDto cartDto = new();
         if (response != null && response.IsSuccess)
         {
-            cartDto = JsonConvert.DeserializeObject<List<ShoppingCartDto>>(Convert.ToString(response.Result));
+            cartDto = JsonConvert.DeserializeObject<ShoppingCartDto>(Convert.ToString(response.Result));
         }
 
-        if (cartDto != null)
+        if (cartDto.CartHeader != null)
         {
-            foreach (var detail in cartDto)
+            foreach (var detail in cartDto.CartDetails)
             {
-                detail.TotalCart += (detail.Product.Price * detail.Count);
+                cartDto.CartHeader.OrderTotal += (detail.Product.Price * detail.Count);
             }
         }
         return cartDto;
