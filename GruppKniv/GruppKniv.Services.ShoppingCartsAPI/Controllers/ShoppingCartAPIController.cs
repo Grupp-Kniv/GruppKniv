@@ -67,4 +67,20 @@ public class ShoppingCartAPIController : Controller
 
         return _response;
     }
+
+    [HttpPost("RemoveShoppingCart")]
+    public async Task<object> RemoveCart([FromBody] int cartId)
+    {
+        try
+        {
+            bool isSuccess = await _shoppingCart.RemoveFromCartAsync(cartId);
+            _response.Result = isSuccess;
+        }
+        catch (Exception ex)
+        {
+            _response.IsSuccess = false;
+            _response.ErrorMessages = new List<string>() { ex.ToString() };
+        }
+        return _response;
+    }
 }
