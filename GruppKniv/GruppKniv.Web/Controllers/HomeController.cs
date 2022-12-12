@@ -1,8 +1,10 @@
 ﻿using GruppKniv.Web.Models;
-using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
 using GruppKniv.Web.Services.IServices;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System.Diagnostics;
 
 namespace GruppKniv.Web.Controllers
 {
@@ -19,7 +21,7 @@ namespace GruppKniv.Web.Controllers
 
         public async Task<IActionResult> Index()
         {
-            List <ProductDto> productList = new();
+            List<ProductDto> productList = new();
             var response = await _productService.GetAllProductsAsync<ResponseDto>();
             if (response != null && response.IsSuccess)
             {
@@ -37,6 +39,19 @@ namespace GruppKniv.Web.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+
+        [Authorize]
+        public async Task<IActionResult> Login()
+        {
+            var accessToken = await HttpContext.GetTokenAsync("access_token");
+            return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult Logout()
+        {
+            return SignOut("Cookies", "oidc");
         }
     }
 }
