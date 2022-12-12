@@ -19,7 +19,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{06F5A546
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Products.Tests", "Products.Tests\Products.Tests.csproj", "{38B2606A-778D-4562-AFCC-2857857682EF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShoppingCart.Tests", "ShoppingCart.Tests\ShoppingCart.Tests.csproj", "{8617B5A9-7C1F-4031-9C6F-0ED9792B40F0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShoppingCart.Tests", "ShoppingCart.Tests\ShoppingCart.Tests.csproj", "{8617B5A9-7C1F-4031-9C6F-0ED9792B40F0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GruppKniv.Services.IdentityAPI", "GruppKniv.Services.IdentityAPI\GruppKniv.Services.IdentityAPI.csproj", "{46E4E972-5B7A-4880-A6F4-4F0B7C71186A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{8617B5A9-7C1F-4031-9C6F-0ED9792B40F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8617B5A9-7C1F-4031-9C6F-0ED9792B40F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8617B5A9-7C1F-4031-9C6F-0ED9792B40F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{46E4E972-5B7A-4880-A6F4-4F0B7C71186A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46E4E972-5B7A-4880-A6F4-4F0B7C71186A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46E4E972-5B7A-4880-A6F4-4F0B7C71186A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46E4E972-5B7A-4880-A6F4-4F0B7C71186A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -62,6 +68,7 @@ Global
 		{A4024DD3-AF86-42BA-883E-68EDF9651231} = {BF56BB08-679B-4E05-8BD9-75C962A6772F}
 		{38B2606A-778D-4562-AFCC-2857857682EF} = {06F5A546-F9BC-4435-8866-3A9DECD7BD46}
 		{8617B5A9-7C1F-4031-9C6F-0ED9792B40F0} = {06F5A546-F9BC-4435-8866-3A9DECD7BD46}
+		{46E4E972-5B7A-4880-A6F4-4F0B7C71186A} = {BF56BB08-679B-4E05-8BD9-75C962A6772F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6855EFF2-40F2-4BF2-BB66-8EFA45466868}

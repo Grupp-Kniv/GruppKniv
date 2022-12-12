@@ -8,4 +8,4 @@ public class CartDetailsDto
     public virtual ProductDto Product { get; set; }
     public int Count { get; set; }
 }
-}
+

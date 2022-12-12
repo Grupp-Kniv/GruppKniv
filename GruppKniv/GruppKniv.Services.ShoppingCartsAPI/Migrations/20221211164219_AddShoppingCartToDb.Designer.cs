@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GruppKniv.Services.ShoppingCartsAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221209144339_AddShoppingCartToDb")]
+    [Migration("20221211164219_AddShoppingCartToDb")]
     partial class AddShoppingCartToDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

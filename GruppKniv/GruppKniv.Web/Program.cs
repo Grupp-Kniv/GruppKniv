@@ -1,6 +1,7 @@
 using GruppKniv.Web;
 using GruppKniv.Web.Services;
 using GruppKniv.Web.Services.IServices;
+using Microsoft.AspNetCore.Authentication;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +14,27 @@ StaticDetails.ShoppingCartAPIBase = builder.Configuration["ServiceUrls:ShoppingC
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IShoppingCartService, ShoppingCartService>();
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultScheme = "Cookies";
+    options.DefaultChallengeScheme = "oidc";
+})
+                .AddCookie("Cookies", c => c.ExpireTimeSpan = TimeSpan.FromMinutes(10))
+                .AddOpenIdConnect("oidc", options =>
+                {
+                    options.Authority = builder.Configuration["ServiceUrls:IdentityAPI"];
+                    options.GetClaimsFromUserInfoEndpoint = true;
+                    options.ClientId = "Magic";
+                    options.ClientSecret = "secret";
+                    options.ResponseType = "code";
+                    options.TokenValidationParameters.NameClaimType = "name";
+                    options.TokenValidationParameters.RoleClaimType = "role";
+                    options.Scope.Add("Magic");
+                    options.SaveTokens = true;
+                    options.ClaimActions.MapJsonKey("role", "role");
+
+                });
 
 var app = builder.Build();
 
@@ -28,7 +50,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
