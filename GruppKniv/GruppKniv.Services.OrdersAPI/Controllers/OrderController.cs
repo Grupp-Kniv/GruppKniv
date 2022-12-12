@@ -55,11 +55,11 @@ namespace GruppKniv.Services.OrdersAPI.Controllers
 
         [HttpPost("/order")]
 
-        public async Task<ResponseDto> PlaceOrder(Order mewOrder)
+        public async Task<ResponseDto> PlaceOrder(OrderDto newOrder)
         {
             try
             {
-                OrderDto orderDto = await _orderRepository.PlaceOrder(mewOrder);
+                OrderDto orderDto = await _orderRepository.PlaceOrder(newOrder);
                 _response.Result = orderDto;
             }
             catch (Exception e)

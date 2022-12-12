@@ -7,6 +7,6 @@ namespace GruppKniv.Services.OrdersAPI.Repository
     {
         Task<List<OrderDto>> GetAllOrders();
         Task<OrderDto> GetOrder(int id);
-        Task<OrderDto> PlaceOrder(Order mewOrder);
+        Task<OrderDto> PlaceOrder(OrderDto newOrder);
     }
 }

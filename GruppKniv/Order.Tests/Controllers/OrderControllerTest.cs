@@ -21,14 +21,55 @@ namespace Order.Tests.Controllers
 
         [Fact]
         public void OrderController_GetOrders_ReturnTrue()
-        {
+        {  
             //Arrange
-           
+            var order = A.Fake<List<OrderDto>>();
+            var orders = A.Fake<List<OrderDto>>();
+            A.CallTo(() => _mapper.Map<List<OrderDto>>(order)).Returns(orders);
+            var controller = new OrderController(_orderRepository);
+            
             //Act
+            var result = controller.GetAllOrders();
             
             //Assert
-          
+            Assert.True(_response.IsSuccess);
+            Assert.NotNull(result);
+
         }
+
+
+        [Fact] 
+        public void OrderController_GetOrderById_ReturnTrue()
+        {
+            //Arrange
+            var orderController = new OrderController(_orderRepository);
+
+            //Act
+            var result = orderController.GetOrder(6);
+
+            //Assert
+            Assert.True(_response.IsSuccess);
+            Assert.NotNull(result.Result.Equals(true));
+            Assert.InRange(result.Id, 1, 100);
+        }
+
+
+        [Fact]
+        public void OrderController_PostOrder_ReturnTrue()
+        {
+            //Arrange
+            var newOrder = A.Fake<OrderDto>();
+            A.CallTo(() => _mapper.Map<OrderDto>(newOrder)).Returns(newOrder);
+            var controller = new OrderController(_orderRepository);
+
+            //Act
+            var result = controller.PlaceOrder(newOrder);
+
+            //Assert
+            Assert.True(result.IsCompleted);
+            Assert.NotNull(result);
+        }
+
     }
 }
     

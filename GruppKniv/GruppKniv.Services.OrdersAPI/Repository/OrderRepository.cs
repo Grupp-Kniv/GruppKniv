@@ -25,12 +25,12 @@ namespace GruppKniv.Services.OrdersAPI.Repository
 
         public async Task<OrderDto> GetOrder(int id)
         {
-            Order order = await _db.Orders.Where(o => o.OrderId == id).FirstOrDefaultAsync();
+            Order order = await _db.Orders.Where(o => o.OrderId == id).Include(p => p.Product).FirstOrDefaultAsync();
 
             return _mapper.Map<OrderDto>(order);
         }
 
-        public async Task<OrderDto> PlaceOrder(Order mewOrder)
+        public async Task<OrderDto> PlaceOrder(OrderDto newOrder)
         {
             Order order = _mapper.Map<OrderDto, Order>(new OrderDto());
             _db.Orders.Add(order);

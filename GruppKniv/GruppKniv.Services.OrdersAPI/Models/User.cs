@@ -1,10 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GruppKniv.Services.OrdersAPI.Models
 {
     public class User
     {
-        [Key]
-        public int userId { get; set; }
+        [Key,DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public int UserId { get; set; }
     }
 }

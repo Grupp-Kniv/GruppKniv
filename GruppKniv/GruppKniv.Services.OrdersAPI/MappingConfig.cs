@@ -12,7 +12,8 @@ namespace GruppKniv.Services.OrdersAPI
             {
                 config.CreateMap<Order, OrderDto>().ReverseMap();
                 config.CreateMap<Product, ProductDto>().ReverseMap();
-                //user?
+                config.CreateMap<User, UserDto>().ReverseMap();
+
             });
 
             return mappingConfig;

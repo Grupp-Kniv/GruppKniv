@@ -24,22 +24,19 @@ namespace GruppKniv.Services.OrdersAPI.Migrations
             modelBuilder.Entity("GruppKniv.Services.OrdersAPI.Models.Order", b =>
                 {
                     b.Property<int>("OrderId")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderId"));
 
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
 
-                    b.Property<int>("userId")
+                    b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("OrderId");
 
                     b.HasIndex("ProductId");
 
-                    b.HasIndex("userId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Orders");
                 });
@@ -49,9 +46,20 @@ namespace GruppKniv.Services.OrdersAPI.Migrations
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
 
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImageUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
 
                     b.HasKey("ProductId");
 
@@ -60,13 +68,10 @@ namespace GruppKniv.Services.OrdersAPI.Migrations
 
             modelBuilder.Entity("GruppKniv.Services.OrdersAPI.Models.User", b =>
                 {
-                    b.Property<int>("userId")
-                        .ValueGeneratedOnAdd()
+                    b.Property<int>("UserId")
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("userId"));
-
-                    b.HasKey("userId");
+                    b.HasKey("UserId");
 
                     b.ToTable("Users");
                 });
@@ -81,7 +86,7 @@ namespace GruppKniv.Services.OrdersAPI.Migrations
 
                     b.HasOne("GruppKniv.Services.OrdersAPI.Models.User", "User")
                         .WithMany()
-                        .HasForeignKey("userId")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
