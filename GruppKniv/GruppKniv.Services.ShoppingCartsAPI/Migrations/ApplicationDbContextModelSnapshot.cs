@@ -21,6 +21,48 @@ namespace GruppKniv.Services.ShoppingCartsAPI.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
+            modelBuilder.Entity("GruppKniv.Services.ShoppingCartsAPI.Models.CartDetails", b =>
+                {
+                    b.Property<int>("CartDetailsId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CartDetailsId"), 1L, 1);
+
+                    b.Property<int>("CartHeaderId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Count")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.HasKey("CartDetailsId");
+
+                    b.HasIndex("CartHeaderId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("CartDetails");
+                });
+
+            modelBuilder.Entity("GruppKniv.Services.ShoppingCartsAPI.Models.CartHeader", b =>
+                {
+                    b.Property<int>("CartHeaderId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CartHeaderId"), 1L, 1);
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("CartHeaderId");
+
+                    b.ToTable("CartHeaders");
+                });
+
             modelBuilder.Entity("GruppKniv.Services.ShoppingCartsAPI.Models.Product", b =>
                 {
                     b.Property<int>("ProductId")
@@ -44,37 +86,21 @@ namespace GruppKniv.Services.ShoppingCartsAPI.Migrations
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("GruppKniv.Services.ShoppingCartsAPI.Models.ShoppingCart", b =>
+            modelBuilder.Entity("GruppKniv.Services.ShoppingCartsAPI.Models.CartDetails", b =>
                 {
-                    b.Property<int>("ShoppingCartId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                    b.HasOne("GruppKniv.Services.ShoppingCartsAPI.Models.CartHeader", "CartHeader")
+                        .WithMany()
+                        .HasForeignKey("CartHeaderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ShoppingCartId"), 1L, 1);
-
-                    b.Property<int>("Count")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("ShoppingCartId");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("ShoppingCarts");
-                });
-
-            modelBuilder.Entity("GruppKniv.Services.ShoppingCartsAPI.Models.ShoppingCart", b =>
-                {
                     b.HasOne("GruppKniv.Services.ShoppingCartsAPI.Models.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("CartHeader");
 
                     b.Navigation("Product");
                 });

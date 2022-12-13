@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Reflection;
+using Microsoft.AspNetCore.Authorization;
 
 namespace GruppKniv.Web.Controllers
 {
@@ -18,11 +19,13 @@ namespace GruppKniv.Web.Controllers
         {
             _productService = productService;
         }
+        [Authorize("Admin")]
         public async Task<IActionResult> IndexProduct()
         {
             List<ProductDto> list = new();
+            var accessToken = await HttpContext.GetTokenAsync("access_token");
             //call for responseDto because inside our API we are returning that object
-            var response = await _productService.GetAllProductsAsync<ResponseDto>();
+            var response = await _productService.GetAllProductsAsync<ResponseDto>(accessToken);
             if (response != null && response.IsSuccess)
             {
                 //To populate the list we need to use deserializing 
@@ -38,13 +41,15 @@ namespace GruppKniv.Web.Controllers
             return View();
         }
         [HttpPost]
+        [Authorize("Admin")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateProduct(ProductDto model)
         {
             if(ModelState.IsValid)
             {
+                var accessToken = await HttpContext.GetTokenAsync("access_token");
                 //call for responseDto because inside our API we are returning that object
-                var response = await _productService.CreateProductAsync<ResponseDto>(model);
+                var response = await _productService.CreateProductAsync<ResponseDto>(model,accessToken);
                 if (response != null && response.IsSuccess)
                 {
                     return RedirectToAction(nameof(IndexProduct));
@@ -53,10 +58,11 @@ namespace GruppKniv.Web.Controllers
             return View(model);
 
         }
+        [Authorize]
         public async Task<IActionResult> UpdateProduct(int productId)
         {
-            
-            var response = await _productService.GetProductByIdAsync<ResponseDto>(productId);
+            var accessToken = await HttpContext.GetTokenAsync("access_token");
+            var response = await _productService.GetProductByIdAsync<ResponseDto>(productId,accessToken);
             if (response != null && response.IsSuccess)
             {
                 ProductDto model = JsonConvert.DeserializeObject<ProductDto>(Convert.ToString(response.Result));
@@ -70,8 +76,9 @@ namespace GruppKniv.Web.Controllers
         {
             if (ModelState.IsValid)
             {
+                var accessToken = await HttpContext.GetTokenAsync("access_token");
                 //call for responseDto because inside our API we are returning that object
-                var response = await _productService.UpdateProductAsync<ResponseDto>(model);
+                var response = await _productService.UpdateProductAsync<ResponseDto>(model,accessToken);
                 if (response != null && response.IsSuccess)
                 {
                     return RedirectToAction(nameof(IndexProduct));
@@ -80,10 +87,11 @@ namespace GruppKniv.Web.Controllers
             return View(model);
 
         }
-            public async Task<IActionResult> DeleteProduct(int productId)
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> DeleteProduct(int productId)
         {
-            
-            var response = await _productService.GetProductByIdAsync<ResponseDto>(productId);
+            var accessToken = await HttpContext.GetTokenAsync("access_token");
+            var response = await _productService.GetProductByIdAsync<ResponseDto>(productId,accessToken);
             if (response != null && response.IsSuccess)
             {
                 ProductDto model = JsonConvert.DeserializeObject<ProductDto>(Convert.ToString(response.Result));
@@ -92,12 +100,14 @@ namespace GruppKniv.Web.Controllers
             return NotFound();
         }
             [HttpPost]
-            [ValidateAntiForgeryToken]
+            [Authorize(Roles = "Admin")]
+        [ValidateAntiForgeryToken]
             public async Task<IActionResult> DeleteProduct(ProductDto model)
             {
                 if (ModelState.IsValid)
                 {
-                    var response = await _productService.DeleteProductAsync<ResponseDto>(model.ProductId);
+                    var accessToken = await HttpContext.GetTokenAsync("access_token");
+                var response = await _productService.DeleteProductAsync<ResponseDto>(model.ProductId,accessToken);
                     if (response.IsSuccess)
                     {
                         return RedirectToAction(nameof(IndexProduct));

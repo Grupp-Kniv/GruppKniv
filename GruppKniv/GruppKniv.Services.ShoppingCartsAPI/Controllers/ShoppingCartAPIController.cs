@@ -1,5 +1,6 @@
 ﻿using GruppKniv.Services.ShoppingCartsAPI.Models.DTO;
 using GruppKniv.Services.ShoppingCartsAPI.Repository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GruppKniv.Services.ShoppingCartsAPI.Controllers;
@@ -16,6 +17,7 @@ public class ShoppingCartAPIController : Controller
         _response = new ResponseDto();
     }
 
+    [Authorize]
     [HttpGet("GetShoppingCart/{userId}")]
     public async Task<ResponseDto> GetShoppingCartByUserId(string userId)
     {
@@ -33,7 +35,7 @@ public class ShoppingCartAPIController : Controller
         return _response;
     }
 
-
+    [Authorize]
     [HttpPost("AddShoppingCart")]
     public async Task<ResponseDto> AddShoppingCart(ShoppingCartDto shoppingCartDto)
     {
@@ -51,6 +53,7 @@ public class ShoppingCartAPIController : Controller
         return _response;
     }
 
+    [Authorize]
     [HttpPost("UpdateShoppingCart")]
     public async Task<ResponseDto> UpdateShoppingCart(ShoppingCartDto shoppingCartDto)
     {
@@ -65,6 +68,23 @@ public class ShoppingCartAPIController : Controller
             _response.ErrorMessages = new List<string>() { ex.ToString() };
         }
 
+        return _response;
+    }
+
+    [Authorize]
+    [HttpPost("RemoveShoppingCart")]
+    public async Task<object> RemoveCart([FromBody] int cartId)
+    {
+        try
+        {
+            bool isSuccess = await _shoppingCart.RemoveFromCartAsync(cartId);
+            _response.Result = isSuccess;
+        }
+        catch (Exception ex)
+        {
+            _response.IsSuccess = false;
+            _response.ErrorMessages = new List<string>() { ex.ToString() };
+        }
         return _response;
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Net.Http.Headers;
+using System.Text;
 using Newtonsoft.Json;
 using GruppKniv.Web.Models;
 
@@ -32,6 +33,10 @@ namespace GruppKniv.Web.Services.IServices
                     message.Content = new StringContent(JsonConvert.SerializeObject(apiRequest.Data),Encoding.UTF8,"application/json");
                 }
 
+                if (!string.IsNullOrEmpty(apiRequest.AccessToken))
+                {
+                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", apiRequest.AccessToken);
+                }
                 HttpResponseMessage apiResponse = null;
                 switch (apiRequest.ApiType)
                 {

@@ -1,5 +1,6 @@
 ﻿using GruppKniv.Services.ProductsAPI.Models.Dto;
 using GruppKniv.Services.ProductsAPI.Repository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GruppKniv.Services.ProductsAPI.Controllers
@@ -16,6 +17,8 @@ namespace GruppKniv.Services.ProductsAPI.Controllers
             _productRepository = productRepository;
             this._response = new ResponseDto();
         }
+
+        
 
         [HttpGet]
         //Generic(object
@@ -40,6 +43,7 @@ namespace GruppKniv.Services.ProductsAPI.Controllers
             return _response;
         }
 
+        [Authorize]
         [HttpGet]
         [Route("{id}")]
         //Generic(object
@@ -64,7 +68,9 @@ namespace GruppKniv.Services.ProductsAPI.Controllers
             return _response;
         }
 
+        [Authorize]
         [HttpPost]
+        [Authorize]
 
         //Generic(object
         public async Task<object> Post([FromBody] ProductDto productDto)
@@ -88,7 +94,9 @@ namespace GruppKniv.Services.ProductsAPI.Controllers
             return _response;
         }
 
+        [Authorize]
         [HttpPut]
+        [Authorize]
 
         //Generic(object
         public async Task<object> Put([FromBody] ProductDto productDto)
@@ -111,7 +119,10 @@ namespace GruppKniv.Services.ProductsAPI.Controllers
 
             return _response;
         }
+
+        [Authorize(Roles = "Admin")]
         [HttpDelete]
+        [Authorize(Roles = "Admin")]
         [Route("{id}")]
         public async Task<object> Delete(int id)
         {

@@ -11,6 +11,8 @@ public class MappingConfig
         var mappingConfig = new MapperConfiguration(config =>
         {
             config.CreateMap<ShoppingCart, ShoppingCartDto>().ReverseMap();
+            config.CreateMap<CartHeader, CartHeaderDto>().ReverseMap();
+            config.CreateMap<CartDetails, CartDetailsDto>().ReverseMap();
             config.CreateMap<Product, ProductDto>().ReverseMap();
         });
 
