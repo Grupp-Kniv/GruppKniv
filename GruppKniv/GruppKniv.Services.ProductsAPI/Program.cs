@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using System.Text;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,15 +21,28 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddControllers();
 
-//Identity Configuration
-//builder.Services.AddAuthentication("Bearer").AddJwtBearer("Bearer", options =>
-//{
-//    options.Authority = "https://localhost:7031/";
-//    options.TokenValidationParameters = new TokenValidationParameters
-//    {
-//        ValidateAudience = false
-//    };
-//});
+//FOR IDENTITY
+builder.Services.AddAuthentication("Bearer")
+    .AddJwtBearer("Bearer", options =>
+    {
+        options.Authority = "https://localhost:7071/";
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateAudience = false
+        };
+    });
+//checks for valid claims
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("ApiScope", policy =>
+    {
+        policy.RequireAuthenticatedUser();
+        policy.RequireClaim("scope", "gruppkniv");
+    });
+});
+
+
+
 
 var key = builder.Configuration.GetValue<string>("ApiSettings:Secret");
 builder.Services.AddAuthentication(x =>
@@ -51,15 +64,6 @@ builder.Services.AddAuthentication(x =>
         };
     });
 
-//Authorization Policy
-//builder.Services.AddAuthorization(options =>
-//{
-//    options.AddPolicy("ApiScope", policy =>
-//    {
-//        policy.RequireAuthenticatedUser();
-//        policy.RequireClaim("scope", "Magic");
-//    });
-//});
 
 builder.Services.AddSwaggerGen(c =>
 {
@@ -92,25 +96,58 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
-
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Title = "GruppKniv.Services.ProductAPI", Version = "v1"
+    });
+    c.EnableAnnotations();
+    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        Description = @"Enter 'Bearer' [space] and your token",
+        Name = "Authorization",
+        In = ParameterLocation.Header,
+        Type = SecuritySchemeType.ApiKey,
+        Scheme = "Bearer"
+    });
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        {
+            new OpenApiSecurityScheme
+            {
+                Reference = new OpenApiReference
+                {
+                    Type = ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                },
+                Scheme = "oauth2",
+                Name = "Bearer",
+                In = ParameterLocation.Header
+            },
+            new List<string>()
+        }
+
+    });
+});
 
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    if (app.Environment.IsDevelopment())
+    {
+        app.UseDeveloperExceptionPage();
+        app.UseSwagger();
+    app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "GruppKniv.Services.ProductAPI v1"));
 }
 
-app.UseHttpsRedirection();
+    app.UseHttpsRedirection();
+app.UseAuthentication();
+    app.UseAuthorization();
 
-app.UseAuthorization();
+    app.MapControllers();
 
-app.MapControllers();
-
-app.Run();
+    app.Run();
