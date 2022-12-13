@@ -12,20 +12,39 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img width="40px" src="images/Pizza ikon.png"/>  Pizzeria Kniv</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img width="40px" src="images/Pizza ikon.png" />  Pizzeria Kniv</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                    <partial name="_LoginPartial"/>
+
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item pt-lg-1">
                             <a class="nav-link " asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-	                    <li class="nav-item pt-lg-1">
-		                    <a class="nav-link " asp-area="" asp-controller="Product" asp-action="IndexProduct">Pizzor</a>
-	                    </li>
+
+                        @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item pt-lg-1">
+                                <a class="nav-link " asp-area="" asp-controller="Product" asp-action="IndexProduct">Pizzor</a>
+                            </li>
+                        }
+                       
+
+                        <li class="nav-item pt-lg-1">
+                            <a class="nav-link " asp-area="" asp-controller="Product" asp-action="IndexProduct">Pizzor</a>
+                        </li>
+                        <li class="nav-item pt-lg-1">
+                            <a class="nav-link" asp-controller="ShoppingCart" asp-action="ShoppingCartIndex">
+                                <i class="fas fa-shopping-cart"></i>
+                            </a>
+                        </li>
+
                     </ul>
+                    <partial name="_LoginPartial"/>
                 </div>
             </div>
         </nav>
@@ -41,8 +60,8 @@
             &copy; 2022 - GruppKniv.Web
         </div>
     </footer>
-<script src="~/lib/jquery/dist/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
