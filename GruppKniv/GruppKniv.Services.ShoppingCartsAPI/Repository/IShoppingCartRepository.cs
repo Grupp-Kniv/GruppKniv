@@ -6,7 +6,6 @@ public interface IShoppingCartRepository
 {
     Task<ShoppingCartDto> GetCartByUserIdAsync(string userId);
     Task<ShoppingCartDto> CreateUpdateCartAsync(ShoppingCartDto cartDto);
-    //Task<bool> ClearCartAsync(string userId);
-
-    //Task<bool> RemoveFromCartAsync(int cartId);
+    Task<bool> RemoveFromCartAsync(int cartDetailsId);
+    Task<bool> ClearCartAsync(string userId);
 }

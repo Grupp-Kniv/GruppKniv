@@ -16,6 +16,7 @@ builder.Services.AddScoped<IShoppingCartService, ShoppingCartService>();
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddAuthentication(options =>
+
     {
         options.DefaultScheme = "Cookies";
         options.DefaultChallengeScheme = "oidc";
@@ -35,6 +36,7 @@ builder.Services.AddAuthentication(options =>
         options.Scope.Add("gruppkniv");
         options.SaveTokens = true;
     });
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
