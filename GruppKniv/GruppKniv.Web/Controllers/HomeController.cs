@@ -19,15 +19,18 @@ namespace GruppKniv.Web.Controllers
             _productService = productService;
         }
 
+        
         public async Task<IActionResult> Index()
         {
-            List<ProductDto> productList = new();
-            var response = await _productService.GetAllProductsAsync<ResponseDto>();
+
+            List <ProductDto> list = new();
+            var response = await _productService.GetAllProductsAsync<ResponseDto>("");
+
             if (response != null && response.IsSuccess)
             {
-                productList = JsonConvert.DeserializeObject<List<ProductDto>>(Convert.ToString(response.Result));
+                list = JsonConvert.DeserializeObject<List<ProductDto>>(Convert.ToString(response.Result));
             }
-            return View(productList);
+            return View(list);
         }
 
         public IActionResult Privacy()
@@ -41,17 +44,16 @@ namespace GruppKniv.Web.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-
         [Authorize]
-        public async Task<IActionResult> Login()
+        public async Task <IActionResult> Login()
         {
-            var accessToken = await HttpContext.GetTokenAsync("access_token");
+           
             return RedirectToAction(nameof(Index));
         }
-
         public IActionResult Logout()
         {
-            return SignOut("Cookies", "oidc");
+            return SignOut("Cookies","oidc");
+
         }
     }
 }

@@ -18,7 +18,8 @@ namespace GruppKniv.Services.ProductsAPI.Controllers
             this._response = new ResponseDto();
         }
 
-        [Authorize]
+        
+
         [HttpGet]
         //Generic(object
         public async Task<object> Get()
@@ -69,6 +70,7 @@ namespace GruppKniv.Services.ProductsAPI.Controllers
 
         [Authorize]
         [HttpPost]
+        [Authorize]
 
         //Generic(object
         public async Task<object> Post([FromBody] ProductDto productDto)
@@ -94,6 +96,7 @@ namespace GruppKniv.Services.ProductsAPI.Controllers
 
         [Authorize]
         [HttpPut]
+        [Authorize]
 
         //Generic(object
         public async Task<object> Put([FromBody] ProductDto productDto)
@@ -119,6 +122,7 @@ namespace GruppKniv.Services.ProductsAPI.Controllers
 
         [Authorize(Roles = "Admin")]
         [HttpDelete]
+        [Authorize(Roles = "Admin")]
         [Route("{id}")]
         public async Task<object> Delete(int id)
         {

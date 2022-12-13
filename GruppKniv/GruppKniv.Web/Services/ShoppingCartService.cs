@@ -12,35 +12,35 @@ public class ShoppingCartService : BaseService, IShoppingCartService
         _clientFactory = clientFactory;
     }
 
-    public async Task<T> AddToCartAsync<T>(ShoppingCartDto cartDto, string token = null)
+    public async Task<T> AddToCartAsync<T>(ShoppingCartDto cartDto, string token)
     {
         return await this.SendAsync<T>(new ApiRequest()
         {
             ApiType = StaticDetails.ApiType.POST,
             Data = cartDto,
             Url = StaticDetails.ShoppingCartAPIBase + "/api/shoppingCart/AddShoppingCart",
-            AccessToken = ""
+            AccessToken = token
         });
     }
 
-    public async Task<T> GetCartByUserIdAsnyc<T>(string userId, string token = null)
+    public async Task<T> GetCartByUserIdAsnyc<T>(string userId, string token)
     {
         return await this.SendAsync<T>(new ApiRequest()
         {
             ApiType = StaticDetails.ApiType.GET,
             Url = StaticDetails.ShoppingCartAPIBase + "/api/shoppingCart/GetShoppingCart/" + userId,
-            AccessToken = ""
+            AccessToken = token
         });
     }
 
-    public async Task<T> UpdateCartAsync<T>(ShoppingCartDto cartDto, string token = null)
+    public async Task<T> UpdateCartAsync<T>(ShoppingCartDto cartDto, string token)
     {
         return await this.SendAsync<T>(new ApiRequest()
         {
             ApiType = StaticDetails.ApiType.PUT,
             Data = cartDto,
             Url = StaticDetails.ShoppingCartAPIBase + "/api/shoppingCart/UpdateShoppingCart",
-            AccessToken = ""
+            AccessToken = token
         });
     }
 
