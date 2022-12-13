@@ -14,59 +14,126 @@
   ,
 
   "Routes": [
-    //Product API 
+    //Product API
     {
       "DownstreamPathTemplate": "/api/products",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 44327
+          "Port": 7082
         }
       ],
-      "UpstreamPathTemplate": "/api/products",
-      "UpstreamHttpMethod": [ "GET" ]
-    },
-    {
-      "DownstreamPathTemplate": "/api/products/{id}",
-      "DownstreamScheme": "https",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 44327
-        }
-      ],
-      "UpstreamPathTemplate": "/api/products/{id}",
-      "UpstreamHttpMethod": [ "GET" ]
-    },
-    {
-      "DownstreamPathTemplate": "/api/products",
-      "DownstreamScheme": "https",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 44327
-        }
-      ],
-      "UpstreamPathTemplate": "/api/products",
-      "UpstreamHttpMethod": [ "POST", "PUT" ]
-    },
-    {
-      "DownstreamPathTemplate": "/api/products/{id}",
-      "DownstreamScheme": "https",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "localhost",
-          "Port": 44327
-        }
-      ],
-      "UpstreamPathTemplate": "/api/products/{id}",
-      "UpstreamHttpMethod": [ "DELETE" ]
 
+      "UpstreamPathTemplate": "/api/products",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+
+    {
+      "DownstreamPathTemplate": "/api/products/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7082
+        }
+      ],
+
+      "UpstreamPathTemplate": "/api/products/{id}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+
+    {
+      "DownstreamPathTemplate": "/api/products",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7082
+        }
+      ],
+
+      "UpstreamPathTemplate": "/api/products",
+      "UpstreamHttpMethod": [ "POST", "PUT" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": [ "gruppkniv" ]
+      }
+    },
+
+    {
+      "DownstreamPathTemplate": "/api/products/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7082
+        }
+      ],
+
+      "UpstreamPathTemplate": "/api/products/{id}",
+      "UpstreamHttpMethod": [ "DELETE" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": [ "gruppkniv" ]
+      }
+    },
+
+    //ShoppingCart
+    {
+      "DownstreamPathTemplate": "/api/GetShoppingCart/{userId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7282
+        }
+      ],
+      "UpstreamPathTemplate": "/api/GetShoppingCart/{userId}",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+
+    {
+      "DownstreamPathTemplate": "/api/AddShoppingCart",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7282
+        }
+      ],
+      "UpstreamPathTemplate": "/api/AddShoppingCart",
+      "UpstreamHttpMethod": [ "POST" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": [ "gruppkniv" ]
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/UpdateShoppingCart",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7282
+        }
+      ],
+
+        "UpstreamPathTemplate":"/api/UpdateShoppingCart",
+        "UpstreamHttpMethod": [ "POST" ],
+        "AuthenticationOptions":{
+        
+          "AuthenticationProviderKey": "Bearer",
+          "AllowedScopes": [ "gruppkniv" ]
+        }
     }
   ],
-  "GlobalConfiguration": {
-    "BaseUrl": "https://localhost:5050"
-  }
+  
+      "GlobalConfiguration": {
+        "BaseUrl": "https://localhost:5050"
+      }
+    
+  
 
+  //44327
 }
