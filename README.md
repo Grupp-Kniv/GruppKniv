@@ -8,7 +8,11 @@ SHOPPINGCART API SPECIFIKATION
 
 ORDER API SPECIFIKATION
 
-
+| Endpoint    | Parameter   | Method       | Request URL                     | Result                       |  
+| ----------- | ----------- | ------------ | ------------------------------- | ---------------------------- | 
+| api/orders  |             | GET          | https://localhost:7091/orders   | Returns all orders           | 
+| api/order   | /{id}       | GET          | https://localhost:7091/order/1  | Returns the order with id 1  |
+| api/order   |             | POST         | https://localhost:7091/order    | Creates a new order          |            
 
 
 
