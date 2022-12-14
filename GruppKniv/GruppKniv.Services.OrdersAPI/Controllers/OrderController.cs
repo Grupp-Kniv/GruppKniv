@@ -1,6 +1,7 @@
 ﻿using GruppKniv.Services.OrdersAPI.Models;
 using GruppKniv.Services.OrdersAPI.Models.Dto;
 using GruppKniv.Services.OrdersAPI.Repository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GruppKniv.Services.OrdersAPI.Controllers
@@ -23,7 +24,7 @@ namespace GruppKniv.Services.OrdersAPI.Controllers
         {
             try
             {
-                List<OrderDto> orderDto = await _orderRepository.GetAllOrders();
+                IEnumerable<OrderDto> orderDto = await _orderRepository.GetAllOrders();
                 _response.Result = orderDto;
             }
             catch (Exception e)
@@ -34,7 +35,6 @@ namespace GruppKniv.Services.OrdersAPI.Controllers
 
             return _response;
         }
-
 
         [HttpGet("/order/{id}")]
         public async Task<ResponseDto> GetOrder(int id)
@@ -54,7 +54,6 @@ namespace GruppKniv.Services.OrdersAPI.Controllers
         }
 
         [HttpPost("/order")]
-
         public async Task<ResponseDto> PlaceOrder(OrderDto newOrder)
         {
             try

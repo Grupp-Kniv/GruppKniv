@@ -23,7 +23,7 @@ public class ShoppingCartService : BaseService, IShoppingCartService
         });
     }
 
-    public async Task<T> GetCartByUserIdAsnyc<T>(string userId, string token)
+    public async Task<T> GetCartByUserIdAsync<T>(string userId, string token)
     {
         return await this.SendAsync<T>(new ApiRequest()
         {

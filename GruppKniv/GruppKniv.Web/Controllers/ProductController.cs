@@ -1,11 +1,8 @@
 ﻿using GruppKniv.Web.Models;
-using GruppKniv.Web.Services;
 using GruppKniv.Web.Services.IServices;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using System.Collections.Generic;
-using System.Reflection;
 using Microsoft.AspNetCore.Authorization;
 
 namespace GruppKniv.Web.Controllers
@@ -19,7 +16,7 @@ namespace GruppKniv.Web.Controllers
         {
             _productService = productService;
         }
-        [Authorize("Admin")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> IndexProduct()
         {
             List<ProductDto> list = new();
@@ -41,7 +38,7 @@ namespace GruppKniv.Web.Controllers
             return View();
         }
         [HttpPost]
-        [Authorize("Admin")]
+        [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateProduct(ProductDto model)
         {

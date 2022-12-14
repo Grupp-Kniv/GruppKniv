@@ -119,21 +119,65 @@
         }
       ],
 
-        "UpstreamPathTemplate":"/api/UpdateShoppingCart",
-        "UpstreamHttpMethod": [ "POST" ],
-        "AuthenticationOptions":{
-        
-          "AuthenticationProviderKey": "Bearer",
-          "AllowedScopes": [ "gruppkniv" ]
+      "UpstreamPathTemplate": "/api/UpdateShoppingCart",
+      "UpstreamHttpMethod": [ "POST" ],
+      "AuthenticationOptions": {
+
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": [ "gruppkniv" ]
+      }
+    },
+
+  //OrderAPi
+  {
+    "DownstreamPathTemplate": "/api/orders",
+    "DownstreamScheme": "https",
+    "DownstreamHostAndPorts": [
+      {
+        "Host": "localhost",
+        "Port":7091
+      }
+    ],
+    "UpstreamPathTemplate": "/api/orders",
+    "UpstreamHttpMethod": [ "GET" ]
+  },
+
+  {
+    "DownstreamPathTemplate": "/api/order/{id}",
+    "DownstreamScheme": "https",
+    "DownstreamHostAndPorts": [
+      {
+        "Host": "localhost",
+        "Port": 7091
+      }
+    ],
+    "UpstreamPathTemplate": "/api/order/{id}",
+    "UpstreamHttpMethod": [ "GET" ]
+  },
+
+    {
+      "DownstreamPathTemplate": "/api/order",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7091
         }
+      ],
+
+      "UpstreamPathTemplate": "/api/order",
+      "UpstreamHttpMethod": [ "POST" ],
+      "AuthenticationOptions": 
+      {
+        "AllowedScopes": [ "gruppkniv" ],
+        "AuthenticationProviderKey": "Bearer"
+      }
     }
   ],
-  
-      "GlobalConfiguration": {
-        "BaseUrl": "https://localhost:5050"
-      }
-    
-  
+
+  "GlobalConfiguration": {
+    "BaseUrl": "https://localhost:5050"
+  }
 
   //44327
 }

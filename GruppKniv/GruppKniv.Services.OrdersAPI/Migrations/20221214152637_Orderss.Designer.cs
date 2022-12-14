@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GruppKniv.Services.OrdersAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221212231313_Orders")]
-    partial class Orders
+    [Migration("20221214152637_Orderss")]
+    partial class Orderss
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,7 +27,10 @@ namespace GruppKniv.Services.OrdersAPI.Migrations
             modelBuilder.Entity("GruppKniv.Services.OrdersAPI.Models.Order", b =>
                 {
                     b.Property<int>("OrderId")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderId"));
 
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
@@ -73,6 +76,10 @@ namespace GruppKniv.Services.OrdersAPI.Migrations
                 {
                     b.Property<int>("UserId")
                         .HasColumnType("int");
+
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("UserId");
 
