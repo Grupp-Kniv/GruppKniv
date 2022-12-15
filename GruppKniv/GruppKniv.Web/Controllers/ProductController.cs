@@ -1,9 +1,11 @@
 ﻿using GruppKniv.Web.Models;
 using GruppKniv.Web.Services.IServices;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Microsoft.AspNetCore.Authorization;
+
 
 namespace GruppKniv.Web.Controllers
 {
@@ -42,11 +44,11 @@ namespace GruppKniv.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateProduct(ProductDto model)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 var accessToken = await HttpContext.GetTokenAsync("access_token");
                 //call for responseDto because inside our API we are returning that object
-                var response = await _productService.CreateProductAsync<ResponseDto>(model,accessToken);
+                var response = await _productService.CreateProductAsync<ResponseDto>(model, accessToken);
                 if (response != null && response.IsSuccess)
                 {
                     return RedirectToAction(nameof(IndexProduct));
@@ -55,11 +57,11 @@ namespace GruppKniv.Web.Controllers
             return View(model);
 
         }
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> UpdateProduct(int productId)
         {
             var accessToken = await HttpContext.GetTokenAsync("access_token");
-            var response = await _productService.GetProductByIdAsync<ResponseDto>(productId,accessToken);
+            var response = await _productService.GetProductByIdAsync<ResponseDto>(productId, accessToken);
             if (response != null && response.IsSuccess)
             {
                 ProductDto model = JsonConvert.DeserializeObject<ProductDto>(Convert.ToString(response.Result));
@@ -75,7 +77,7 @@ namespace GruppKniv.Web.Controllers
             {
                 var accessToken = await HttpContext.GetTokenAsync("access_token");
                 //call for responseDto because inside our API we are returning that object
-                var response = await _productService.UpdateProductAsync<ResponseDto>(model,accessToken);
+                var response = await _productService.UpdateProductAsync<ResponseDto>(model, accessToken);
                 if (response != null && response.IsSuccess)
                 {
                     return RedirectToAction(nameof(IndexProduct));
@@ -88,7 +90,7 @@ namespace GruppKniv.Web.Controllers
         public async Task<IActionResult> DeleteProduct(int productId)
         {
             var accessToken = await HttpContext.GetTokenAsync("access_token");
-            var response = await _productService.GetProductByIdAsync<ResponseDto>(productId,accessToken);
+            var response = await _productService.GetProductByIdAsync<ResponseDto>(productId, accessToken);
             if (response != null && response.IsSuccess)
             {
                 ProductDto model = JsonConvert.DeserializeObject<ProductDto>(Convert.ToString(response.Result));
@@ -96,23 +98,23 @@ namespace GruppKniv.Web.Controllers
             }
             return NotFound();
         }
-            [HttpPost]
-            [Authorize(Roles = "Admin")]
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
-            public async Task<IActionResult> DeleteProduct(ProductDto model)
+        public async Task<IActionResult> DeleteProduct(ProductDto model)
+        {
+            if (ModelState.IsValid)
             {
-                if (ModelState.IsValid)
+                var accessToken = await HttpContext.GetTokenAsync("access_token");
+                var response = await _productService.DeleteProductAsync<ResponseDto>(model.ProductId, accessToken);
+                if (response.IsSuccess)
                 {
-                    var accessToken = await HttpContext.GetTokenAsync("access_token");
-                var response = await _productService.DeleteProductAsync<ResponseDto>(model.ProductId,accessToken);
-                    if (response.IsSuccess)
-                    {
-                        return RedirectToAction(nameof(IndexProduct));
-                    }
+                    return RedirectToAction(nameof(IndexProduct));
                 }
-                return View(model);
             }
+            return View(model);
+        }
 
     }
-   
+
 }

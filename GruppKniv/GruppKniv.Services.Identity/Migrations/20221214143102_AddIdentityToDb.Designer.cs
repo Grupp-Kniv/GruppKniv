@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GruppKniv.Services.Identity.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221212203320_addedFirstAndLastNameToAppUser")]
-    partial class addedFirstAndLastNameToAppUser
+    [Migration("20221214143102_AddIdentityToDb")]
+    partial class AddIdentityToDb
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

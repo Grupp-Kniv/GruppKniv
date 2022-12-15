@@ -81,7 +81,7 @@
 
     //ShoppingCart
     {
-      "DownstreamPathTemplate": "/api/GetShoppingCart/{userId}",
+      "DownstreamPathTemplate": "/api/shoppingCart/{userId}",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
@@ -89,12 +89,12 @@
           "Port": 7282
         }
       ],
-      "UpstreamPathTemplate": "/api/GetShoppingCart/{userId}",
+      "UpstreamPathTemplate": "/api/shoppingCart/{userId}",
       "UpstreamHttpMethod": [ "GET" ]
     },
 
     {
-      "DownstreamPathTemplate": "/api/AddShoppingCart",
+      "DownstreamPathTemplate": "/api/shoppingCart/AddShoppingCart",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
@@ -102,7 +102,7 @@
           "Port": 7282
         }
       ],
-      "UpstreamPathTemplate": "/api/AddShoppingCart",
+      "UpstreamPathTemplate": "/api/shoppingCart/AddShoppingCart",
       "UpstreamHttpMethod": [ "POST" ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "Bearer",
@@ -110,7 +110,7 @@
       }
     },
     {
-      "DownstreamPathTemplate": "/api/UpdateShoppingCart",
+      "DownstreamPathTemplate": "/api/shoppingCart/UpdateShoppingCart",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
@@ -119,7 +119,8 @@
         }
       ],
 
-      "UpstreamPathTemplate": "/api/UpdateShoppingCart",
+
+      "UpstreamPathTemplate": "/api/shoppingCart/UpdateShoppingCart",
       "UpstreamHttpMethod": [ "POST" ],
       "AuthenticationOptions": {
 
