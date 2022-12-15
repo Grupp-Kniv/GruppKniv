@@ -1,11 +1,10 @@
-﻿using GruppKniv.Services.OrdersAPI.Models;
-using GruppKniv.Services.OrdersAPI.Models.Dto;
+﻿using GruppKniv.Services.OrdersAPI.Models.Dto;
 using GruppKniv.Services.OrdersAPI.Repository;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GruppKniv.Services.OrdersAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/orders")]
     [ApiController]
     public class OrderController : ControllerBase
     {
@@ -18,12 +17,12 @@ namespace GruppKniv.Services.OrdersAPI.Controllers
             _response = new ResponseDto();
         }
 
-        [HttpGet("/orders")]
+        [HttpGet]
         public async Task<ResponseDto> GetAllOrders()
         {
             try
             {
-                List<OrderDto> orderDto = await _orderRepository.GetAllOrders();
+                IEnumerable<OrderDto> orderDto = await _orderRepository.GetAllOrders();
                 _response.Result = orderDto;
             }
             catch (Exception e)
@@ -35,8 +34,8 @@ namespace GruppKniv.Services.OrdersAPI.Controllers
             return _response;
         }
 
-
-        [HttpGet("/order/{id}")]
+        [HttpGet]
+        [Route("{id}")]
         public async Task<ResponseDto> GetOrder(int id)
         {
             try
@@ -53,8 +52,8 @@ namespace GruppKniv.Services.OrdersAPI.Controllers
             return _response;
         }
 
-        [HttpPost("/order")]
-
+        [HttpPost]
+        [Route("/order")]
         public async Task<ResponseDto> PlaceOrder(OrderDto newOrder)
         {
             try

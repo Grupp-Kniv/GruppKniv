@@ -5,7 +5,7 @@ namespace GruppKniv.Services.OrdersAPI.Repository
 {
     public interface IOrderRepository
     {
-        Task<List<OrderDto>> GetAllOrders();
+        Task<IEnumerable<OrderDto>> GetAllOrders();
         Task<OrderDto> GetOrder(int id);
         Task<OrderDto> PlaceOrder(OrderDto newOrder);
     }

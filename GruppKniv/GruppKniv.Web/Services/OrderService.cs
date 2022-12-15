@@ -12,35 +12,35 @@ namespace GruppKniv.Web.Services
             _clientFactory = httpClient;
         }
 
-        public async Task<T> GetAllOrdersAsync<T>()
+        public async Task<T> GetAllOrdersAsync<T>(string token)
         {
 
             return await this.SendAsync<T>(new ApiRequest()
             {
                 ApiType = StaticDetails.ApiType.GET,
                 Url = StaticDetails.ProductAPIBase + "/api/orders",
-                AccessToken = ""
+                AccessToken = token
             });
         }
 
-        public  async Task<T> GetOrder<T>(int id)
+        public  async Task<T> GetOrder<T>(int id, string token)
         {
             return await this.SendAsync<T>(new ApiRequest()
             {
                 ApiType = StaticDetails.ApiType.GET,
                 Url = StaticDetails.ProductAPIBase + "/api/order/" + id,
-                AccessToken = ""
+                AccessToken = token
             });
         }
 
-        public async Task<T> PlaceOrder<T>(OrderDto newOrder)
+        public async Task<T> PlaceOrder<T>(OrderDto newOrder, string token)
         {
             return await this.SendAsync<T>(new ApiRequest()
             {
                 ApiType = StaticDetails.ApiType.POST,
                 Data = newOrder,
                 Url = StaticDetails.ProductAPIBase + "/api/order/",
-                AccessToken = ""
+                AccessToken = token
             });
         }
     }

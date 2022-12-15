@@ -2,6 +2,7 @@
 using GruppKniv.Services.OrdersAPI.DataAccess;
 using GruppKniv.Services.OrdersAPI.Models;
 using GruppKniv.Services.OrdersAPI.Models.Dto;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
 
 namespace GruppKniv.Services.OrdersAPI.Repository
@@ -17,7 +18,7 @@ namespace GruppKniv.Services.OrdersAPI.Repository
             _mapper = mapper;
         }
 
-        public async Task<List<OrderDto>> GetAllOrders()
+        public async Task<IEnumerable<OrderDto>> GetAllOrders()
         {
             List<Order> orders = await _db.Orders.ToListAsync();
             return _mapper.Map<List<OrderDto>>(orders);
@@ -32,10 +33,10 @@ namespace GruppKniv.Services.OrdersAPI.Repository
 
         public async Task<OrderDto> PlaceOrder(OrderDto newOrder)
         {
-            Order order = _mapper.Map<OrderDto, Order>(new OrderDto());
-            _db.Orders.Add(order);
-            await _db.SaveChangesAsync();
-            return _mapper.Map<Order, OrderDto>(order);
+             Order order = _mapper.Map<OrderDto, Order>(newOrder);
+             _db.Orders.Add(order);
+             await _db.SaveChangesAsync();
+             return _mapper.Map<Order, OrderDto>(order);
         }
     }
 }

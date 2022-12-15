@@ -5,7 +5,9 @@ namespace GruppKniv.Services.OrdersAPI.Models
 {
     public class User
     {
-        [Key,DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [Key]
         public int UserId { get; set; }
+
+        public virtual string UserName { get; set; }
     }
 }
