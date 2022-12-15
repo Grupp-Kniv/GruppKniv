@@ -4,6 +4,8 @@ using GruppKniv.Services.ProductsAPI.DbContexts;
 using GruppKniv.Services.ProductsAPI.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,9 +13,11 @@ var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(connectionString));
+
 IMapper mapper = MappingConfig.RegisterMaps().CreateMapper();
 builder.Services.AddSingleton(mapper);
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
 //dependency injection 
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddControllers();
@@ -27,7 +31,7 @@ builder.Services.AddAuthentication("Bearer")
         {
             ValidateAudience = false
         };
-    });
+    });    
 //checks for valid claims
 builder.Services.AddAuthorization(options =>
 {
@@ -36,6 +40,13 @@ builder.Services.AddAuthorization(options =>
         policy.RequireAuthenticatedUser();
         policy.RequireClaim("scope", "gruppkniv");
     });
+});
+
+
+
+builder.Services.AddSwaggerGen(c =>
+{
+    c.EnableAnnotations();
 });
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

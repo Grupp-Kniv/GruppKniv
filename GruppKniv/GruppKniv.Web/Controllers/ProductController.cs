@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using Microsoft.AspNetCore.Authorization;
+
 
 namespace GruppKniv.Web.Controllers
 {

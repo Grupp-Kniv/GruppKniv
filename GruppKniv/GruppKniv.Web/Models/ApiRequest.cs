@@ -1,4 +1,5 @@
-﻿using GruppKniv.Web;
+﻿#nullable enable
+using GruppKniv.Web;
 using static GruppKniv.Web.StaticDetails;
 namespace GruppKniv.Web.Models
 
