@@ -18,7 +18,7 @@ public class ShoppingCartAPIController : Controller
     }
 
     [Authorize]
-    [HttpGet("GetShoppingCart/{userId}")]
+    [HttpGet("{userId}")]
     public async Task<ResponseDto> GetShoppingCartByUserId(string userId)
     {
         try
