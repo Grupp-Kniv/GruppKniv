@@ -15,4 +15,11 @@ ORDER API SPECIFIKATION
 | api/order   |             | POST         | https://localhost:7091/order    | Creates a new order          |            
 
 
+ShoppingCart API Specifikation
+
+| Endpoint                          | Parameter   | Method       | Request URL                                               | Result                       |  
+| ------------------------------ -- | ----------- | ------------ | ----------------------------------------------------------| ---------------------------- | 
+| api/shoppingCart                  |    {id}     | GET          | https://localhost:7282/api/shoppingCart/1                 | Returns a shoppingCart       | 
+| api/shoppingCart/AddShoppingCart  |             | POST         | https://localhost:7282/api/shoppingCart/AddShoppingCart   | Create a shoppingCart        |
+| api/shoppingCart                  |             | POST         | https://localhost:7282/api/shoppingCart/UpdateShoppingCart| Update a shoppingCart        |  
 
