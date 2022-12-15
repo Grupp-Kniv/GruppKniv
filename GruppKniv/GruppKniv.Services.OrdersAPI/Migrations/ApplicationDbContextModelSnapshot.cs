@@ -44,16 +44,35 @@ namespace GruppKniv.Services.OrdersAPI.Migrations
                     b.ToTable("Orders");
                 });
 
+            modelBuilder.Entity("GruppKniv.Services.OrdersAPI.Models.OrderHeader", b =>
+                {
+                    b.Property<int>("OrderId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderId"));
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("OrderId");
+
+                    b.ToTable("OrderHeaders");
+                });
+
             modelBuilder.Entity("GruppKniv.Services.OrdersAPI.Models.Product", b =>
                 {
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Description")
+                    b.Property<string>("ImageUrl")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ImageUrl")
+                    b.Property<string>("Ingridients")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

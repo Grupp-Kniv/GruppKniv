@@ -33,10 +33,10 @@ namespace GruppKniv.Services.OrdersAPI.Repository
 
         public async Task<OrderDto> PlaceOrder(OrderDto newOrder)
         {
-            Order order = _mapper.Map<OrderDto, Order>(newOrder);
-            _db.Orders.Add(order);
-            await _db.SaveChangesAsync();
-            return _mapper.Map<Order, OrderDto>(order);
+             Order order = _mapper.Map<OrderDto, Order>(newOrder);
+             _db.Orders.Add(order);
+             await _db.SaveChangesAsync();
+             return _mapper.Map<Order, OrderDto>(order);
         }
     }
 }

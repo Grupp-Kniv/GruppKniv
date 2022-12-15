@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GruppKniv.Services.OrdersAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20221214152637_Orderss")]
-    partial class Orderss
+    [Migration("20221214174542_Orders")]
+    partial class Orders
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -47,16 +47,35 @@ namespace GruppKniv.Services.OrdersAPI.Migrations
                     b.ToTable("Orders");
                 });
 
+            modelBuilder.Entity("GruppKniv.Services.OrdersAPI.Models.OrderHeader", b =>
+                {
+                    b.Property<int>("OrderId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderId"));
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("OrderId");
+
+                    b.ToTable("OrderHeaders");
+                });
+
             modelBuilder.Entity("GruppKniv.Services.OrdersAPI.Models.Product", b =>
                 {
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Description")
+                    b.Property<string>("ImageUrl")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ImageUrl")
+                    b.Property<string>("Ingridients")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

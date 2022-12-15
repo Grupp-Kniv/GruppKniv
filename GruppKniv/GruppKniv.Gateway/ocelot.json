@@ -143,7 +143,7 @@
   },
 
   {
-    "DownstreamPathTemplate": "/api/order/{id}",
+    "DownstreamPathTemplate": "/api/orders/{id}",
     "DownstreamScheme": "https",
     "DownstreamHostAndPorts": [
       {
@@ -151,7 +151,7 @@
         "Port": 7091
       }
     ],
-    "UpstreamPathTemplate": "/api/order/{id}",
+    "UpstreamPathTemplate": "/api/orders/{id}",
     "UpstreamHttpMethod": [ "GET" ]
   },
 
