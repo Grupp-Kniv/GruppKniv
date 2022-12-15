@@ -18,8 +18,8 @@ ORDER API SPECIFIKATION
 ShoppingCart API Specifikation
 
 | Endpoint                          | Parameter   | Method       | Request URL                                               | Result                       |  
-| ------------------------------ -- | ----------- | ------------ | ----------------------------------------------------------| ---------------------------- | 
-| api/shoppingCart                  |    {id}     | GET          | https://localhost:7282/api/shoppingCart/1                 | Returns a shoppingCart       | 
+| --------------------------------- | ----------- | ------------ | --------------------------------------------------------- | ---------------------------- | 
+| api/shoppingCart                  |    {id}     | GET          | https://localhost:7282/api/shoppingCart/{id}              | Returns a shoppingCart       | 
 | api/shoppingCart/AddShoppingCart  |             | POST         | https://localhost:7282/api/shoppingCart/AddShoppingCart   | Create a shoppingCart        |
 | api/shoppingCart                  |             | POST         | https://localhost:7282/api/shoppingCart/UpdateShoppingCart| Update a shoppingCart        |  
 
