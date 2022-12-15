@@ -1,12 +1,12 @@
 using Duende.IdentityServer.Services;
 using GruppKniv.Services.Identity;
-using GruppKniv.Services.Identity.DbContexts;
-using GruppKniv.Services.Identity.Initializer;
-using GruppKniv.Services.Identity.Models;
-using GruppKniv.Services.Identity.Services;
+using GruppKniv.Services.IdentityAPI.DbContexts;
+using GruppKniv.Services.IdentityAPI.Initializer;
+using GruppKniv.Services.IdentityAPI.Models;
+using GruppKniv.Services.IdentityAPI.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-
+using GruppKniv.Services.IdentityAPI;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.

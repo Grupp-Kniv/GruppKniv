@@ -1,7 +1,7 @@
 ﻿using Duende.IdentityServer;
 using Duende.IdentityServer.Models;
 
-namespace GruppKniv.Services.Identity
+namespace GruppKniv.Services.IdentityAPI
 {
     public static class StaticDetails
     {

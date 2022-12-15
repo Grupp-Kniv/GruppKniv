@@ -3,7 +3,7 @@
 
 
 
-namespace IdentityServerHost.Quickstart.UI
+namespace GruppKniv.Services.IdentityAPI.MainModule.Account
 {
     public class RedirectViewModel
     {

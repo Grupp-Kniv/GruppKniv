@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace GruppKniv.Services.Identity.Models
+namespace GruppKniv.Services.IdentityAPI.Models
 {
     public class ApplicationUser : IdentityUser
     {

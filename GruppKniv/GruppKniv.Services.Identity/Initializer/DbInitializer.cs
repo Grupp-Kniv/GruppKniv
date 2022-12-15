@@ -1,11 +1,10 @@
 ﻿using System.Security.Claims;
-using GruppKniv.Services.Identity.DbContexts;
-using GruppKniv.Services.Identity.Models;
+using GruppKniv.Services.IdentityAPI.DbContexts;
+using GruppKniv.Services.IdentityAPI.Models;
 using IdentityModel;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 
-namespace GruppKniv.Services.Identity.Initializer
+namespace GruppKniv.Services.IdentityAPI.Initializer
 {
     public class DbInitializer : IDbInitializer
     {

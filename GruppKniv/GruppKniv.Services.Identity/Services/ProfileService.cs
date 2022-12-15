@@ -2,11 +2,11 @@
 using Duende.IdentityServer.Extensions;
 using Duende.IdentityServer.Models;
 using Duende.IdentityServer.Services;
-using GruppKniv.Services.Identity.Models;
+using GruppKniv.Services.IdentityAPI.Models;
 using IdentityModel;
 using Microsoft.AspNetCore.Identity;
 
-namespace GruppKniv.Services.Identity.Services
+namespace GruppKniv.Services.IdentityAPI.Services
 {
     public class ProfileService : IProfileService
     {

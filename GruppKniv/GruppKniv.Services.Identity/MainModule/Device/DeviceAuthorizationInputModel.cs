@@ -2,7 +2,9 @@
 // See LICENSE in the project root for license information.
 
 
-namespace IdentityServerHost.Quickstart.UI
+using GruppKniv.Services.IdentityAPI.MainModule.Consent;
+
+namespace GruppKniv.Services.IdentityAPI.MainModule.Device
 {
     public class DeviceAuthorizationInputModel : ConsentInputModel
     {

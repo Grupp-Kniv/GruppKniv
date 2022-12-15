@@ -2,17 +2,14 @@
 // See LICENSE in the project root for license information.
 
 
-using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Duende.IdentityServer.Events;
 using Duende.IdentityServer.Extensions;
 using Duende.IdentityServer.Services;
 using Duende.IdentityServer.Stores;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
-namespace IdentityServerHost.Quickstart.UI
+namespace GruppKniv.Services.IdentityAPI.MainModule.Grants
 {
     /// <summary>
     /// This sample controller allows a user to revoke grants given to clients

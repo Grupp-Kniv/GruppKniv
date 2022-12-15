@@ -2,10 +2,7 @@
 // See LICENSE in the project root for license information.
 
 
-using System;
-using System.Collections.Generic;
-
-namespace IdentityServerHost.Quickstart.UI
+namespace GruppKniv.Services.IdentityAPI.MainModule.Grants
 {
     public class GrantsViewModel
     {

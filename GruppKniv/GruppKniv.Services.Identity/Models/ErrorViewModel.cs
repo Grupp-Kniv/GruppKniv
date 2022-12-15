@@ -1,4 +1,4 @@
-namespace GruppKniv.Services.Identity.Models
+namespace GruppKniv.Services.IdentityAPI.Models
 {
     public class ErrorViewModel
     {

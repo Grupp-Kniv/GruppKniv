@@ -1,7 +1,6 @@
-﻿using IdentityServerHost.Quickstart.UI;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace GruppKniv.Services.Identity.MainModule.Account
+namespace GruppKniv.Services.IdentityAPI.MainModule.Account
 {
     public class RegisterViewModel
     {

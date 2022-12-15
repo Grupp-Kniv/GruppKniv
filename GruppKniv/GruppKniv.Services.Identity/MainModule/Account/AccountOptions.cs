@@ -2,9 +2,7 @@
 // See LICENSE in the project root for license information.
 
 
-using System;
-
-namespace IdentityServerHost.Quickstart.UI
+namespace GruppKniv.Services.IdentityAPI.MainModule.Account
 {
     public class AccountOptions
     {

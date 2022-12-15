@@ -4,7 +4,7 @@
 
 using Duende.IdentityServer.Models;
 
-namespace IdentityServerHost.Quickstart.UI
+namespace GruppKniv.Services.IdentityAPI.MainModule.Home
 {
     public class ErrorViewModel
     {

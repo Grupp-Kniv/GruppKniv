@@ -2,11 +2,11 @@
 // See LICENSE in the project root for license information.
 
 
-using System;
 using Duende.IdentityServer.Models;
+using GruppKniv.Services.IdentityAPI.MainModule.Account;
 using Microsoft.AspNetCore.Mvc;
 
-namespace IdentityServerHost.Quickstart.UI
+namespace GruppKniv.Services.IdentityAPI.MainModule
 {
     public static class Extensions
     {

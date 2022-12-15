@@ -1,4 +1,4 @@
-﻿namespace GruppKniv.Services.Identity.Initializer
+﻿namespace GruppKniv.Services.IdentityAPI.Initializer
 {
     public interface IDbInitializer
     {
