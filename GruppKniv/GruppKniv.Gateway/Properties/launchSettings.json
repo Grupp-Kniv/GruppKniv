@@ -1,0 +1,16 @@
+{
+  "profiles": {
+    "GruppKniv.Gateway": {
+      "commandName": "Project",
+      "launchUrl": "https://localhost:5050/",
+      "applicationUrl": "https://localhost:5050/"
+    }
+  },
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft": "Warning",
+      "Microsoft.Hosting.Lifetime": "Information"
+    }
+  }
+}
