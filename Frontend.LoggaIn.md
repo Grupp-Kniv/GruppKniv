@@ -3,6 +3,8 @@ Hej Niklas. Du kan updatera databasen i samtliga microservices, för att sedan t
 med ANVÄNDARNAMN :Admin123@gmail.com
 
 LÖSENORD : Admin123*
+
+
 ......
 
 Som Admin kan du skapa/editera/deleta produkter under fliken Pizzor i vårt Webb Projekt. 
